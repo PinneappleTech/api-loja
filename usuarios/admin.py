@@ -2,13 +2,13 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 
-from .models import Profile
+from .models import Perfil
 
 # Register your models here.
 class ProfileInline(admin.StackedInline):
-    model = Profile
+    model = Perfil
     can_delete = False
-    verbose_name_plural = 'Profile'
+    verbose_name_plural = 'Perfil'
     fk_name = 'usuario'
 
 class CustomUserAdmin(UserAdmin):
