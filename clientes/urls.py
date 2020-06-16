@@ -1,8 +1,10 @@
 from django.urls import path
 
-from .views import ClienteAPIView, EnderecoAPIView
+from . import views
 
 urlpatterns = [
-    path('clientes/', ClienteAPIView.as_view(), name='clientes'),
-    path('enderecos/', EnderecoAPIView.as_view(), name='enderecos'),
+    path('clientes/', views.ClientesGenericView.as_view(), name='clientes'),
+    path('clientes/<int:pk>', views.ClienteGenericView.as_view(), name='cliente'),
+    path('enderecos/', views.EnderecosGenericView.as_view(), name='enderecos'),
+    path('enderecos/<int:pk>', views.EnderecoGenericView.as_view(), name='endereco'),
 ]

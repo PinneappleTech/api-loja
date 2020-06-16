@@ -1,32 +1,34 @@
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import generics
 
 from .models import Cliente, Endereco
 from .serializers import ClienteSerializer, EnderecoSerializer
 
-# Create your views here.
-class ClienteAPIView(APIView):
+###CLIENTES
+class ClientesGenericView(generics.ListCreateAPIView):
     """
-    API de Clientes
+    API para listar e criar Cliente
     """
-    def get(self, request):
-        clientes = Cliente.objects.all()
-        serializer = ClienteSerializer(clientes, many=True)
-        return Response(serializer.data)
+    queryset = Cliente.objects.all()
+    serializer_class = ClienteSerializer
 
-    def post(self, request):
-        serializer = ClienteSerializer(data=request.data)
-        if serializer.is_valid():
-            return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+class ClienteGenericView(generics.RetrieveUpdateDestroyAPIView):
+    """
+    API para buscar, atualizar e deletar Cliente
+    """
+    queryset = Cliente.objects.all()
+    serializer_class = ClienteSerializer
 
-class EnderecoAPIView(APIView):
+###Enderecos
+class EnderecosGenericView(generics.ListCreateAPIView):
     """
-    API de Endereços de Clientes
+    API para listar e criar Enderecos
     """
-    def get(self, request):
-        enderecos = Endereco.objects.all()
-        serializer = EnderecoSerializer(enderecos, many=True)
-        return Response(serializer.data)
+    queryset = Endereco.objects.all()
+    serializer_class = EnderecoSerializer
+
+class EnderecoGenericView(generics.RetrieveUpdateDestroyAPIView):
+    """
+    API para buscar, atualizar e deletar endereco
+    """
+    queryset = Endereco.objects.all()
+    serializer_class = EnderecoSerializer
