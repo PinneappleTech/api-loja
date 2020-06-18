@@ -1,11 +1,11 @@
 version: '3'
 services:
-    db:
-        image: postgres
-        environment:
-            POSTGRES_PASSWORD: "@pineapple2020"
-        ports:
-            - "5432:5432"
+#    db:
+#        image: postgres
+#        environment:
+#            POSTGRES_PASSWORD: "@pineapple2020"
+#        ports:
+#            - "5432:5432"
 #        networks:
 #            - postgres-network
 
@@ -25,9 +25,9 @@ services:
         volumes:
             - .:/code
         ports:
-            - "8000:8000"
-        links:
-            - db
+            - "80:8000"
+#        links:
+#            - db
 
 #networks: 
 #    postgres-network:
