@@ -10,3 +10,7 @@ class UsuariosGenericView(generics.ListCreateAPIView):
     """
     queryset = User.objects.all()
     serializer_class = UsuarioSerializer
+
+    def get_queryset(self):
+        return super().get_queryset()
+    
