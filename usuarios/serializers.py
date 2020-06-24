@@ -3,8 +3,35 @@ from django.contrib.auth.models import User
 
 from .models import Perfil
 
+class PerfilSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Perfil
+        fields = (
+            'tipo_usuario',
+            'sexo',
+            'fone',
+            'cpf',
+            'data_nasc',
+        )
 
 class UsuarioSerializer(serializers.ModelSerializer):
+    perfil = PerfilSerializer()
+
     class Meta:
         model = User
-        fields = '__all__'
+        extra_kwargs= {
+            'last_login': {'read_only':True},
+            'date_joined': {'read_only':True},
+        }
+        fields = (
+            'username',
+            'password',
+            'first_name',
+            'last_name',
+            'email',
+            'is_staff',
+            'is_active',
+            'last_login',
+            'date_joined',
+            'perfil',
+        )

@@ -32,8 +32,8 @@ class Endereco(Base):
 class Cliente(Base):
     #FEMININO, MASCULINO
     SEXO = (
-        (1, 'FEMININO'),
-        (2, 'MASCULINO'),
+        ('F', 'FEMININO'),
+        ('M', 'MASCULINO'),
     )
 
     #CASADO, DIVORCIADO, SOLTEIRO, VIUVO
@@ -50,7 +50,7 @@ class Cliente(Base):
                                         'unique': _("Um Cliente com este CPF já existe.")
                                      })
     rg             = models.CharField(max_length=15, blank=True, null=True)
-    sexo           = models.PositiveSmallIntegerField(choices=SEXO)
+    sexo           = models.CharField(max_length=1, choices=SEXO)
     data_nasc      = models.DateField()
     fone           = models.CharField(max_length=11)
     email          = models.EmailField()
