@@ -19,10 +19,6 @@ class UsuarioSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        extra_kwargs= {
-            'last_login': {'read_only':True},
-            'date_joined': {'read_only':True},
-        }
         fields = (
             'username',
             'password',
@@ -35,3 +31,4 @@ class UsuarioSerializer(serializers.ModelSerializer):
             'date_joined',
             'perfil',
         )
+        read_only_fields = ['last_login', 'date_joined', 'perfil']

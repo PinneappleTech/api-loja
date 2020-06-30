@@ -24,6 +24,6 @@ class UsuariosViewset(viewsets.ModelViewSet):
         except Perfil.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
-    def create(self, request):
-        for data in request.data:
-            print(data)
+    # def create(self, request):
+    #     for data in request.data:
+    #         print(data)
