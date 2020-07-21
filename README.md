@@ -13,3 +13,39 @@
 8 - basta criar um superusuario com
     docker-compose run web python manage.py createsuperuser
 9 - entrar com os dados e pronto.
+
+# Rotas da API
+
+##### Rotas de Autenticação
+POST Login - /auth/login/
+        {
+            "username":"",
+            "password":""
+        }
+
+POST Registro - /auth/registration/
+        {
+            "username":"",
+            "email":"",
+            "password1":"",
+            "password2":""
+        }
+
+POST Logout - /auth/logout/
+        {
+            "token":""
+        }
+
+###### Rotas de Usuarios
+GET Usuarios - /api1/usuarios/
+GET Usuario - /api1/usuarios/<pk>/
+POST Usuario - /api1/usuarios/
+PUT Usuario - /api1/usuarios/<pk>/
+DELETE Usuario - /api1/usuarios/<pk>/
+
+###### Rotas de Clientes
+GET Clientes - /api1/clientes/
+GET Cliente - /api1/clientes/<pk>/
+POST Cliente - /api1/clientes/
+PUT Cliente - /api1/clientes/<pk>/
+DELETE Cliente - /api1/clientes/<pk>/
