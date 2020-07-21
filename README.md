@@ -30,22 +30,22 @@
 ## Rotas de Usuarios
 **GET Usuarios - /api1/usuarios/**
 
-**GET Usuario - /api1/usuarios/<pk>/**
+**GET Usuario - /api1/usuarios/id/**
 
 **POST Usuario - /api1/usuarios/**
 
-**PUT Usuario - /api1/usuarios/<pk>/**
+**PUT Usuario - /api1/usuarios/id/**
 
-**DELETE Usuario - /api1/usuarios/<pk>/**
+**DELETE Usuario - /api1/usuarios/id/**
 
 
 ## Rotas de Clientes
 **GET Clientes - /api1/clientes/**
 
-**GET Cliente - /api1/clientes/<pk>/**
+**GET Cliente - /api1/clientes/id/**
 
 **POST Cliente - /api1/clientes/**
 
-**PUT Cliente - /api1/clientes/<pk>/**
+**PUT Cliente - /api1/clientes/id/**
 
-**DELETE Cliente - /api1/clientes/<pk>/**
+**DELETE Cliente - /api1/clientes/id/**
