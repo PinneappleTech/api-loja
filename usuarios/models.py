@@ -5,8 +5,8 @@ from django.utils.translation import ugettext_lazy as _
 # Create your models here.
 class Perfil(models.Model):
     SEXO = (
-        (1, 'FEMININO'),
-        (2, 'MASCULINO'),
+        ('F', 'FEMININO'),
+        ('M', 'MASCULINO'),
     )
 
     VENDEDOR = 1
@@ -21,9 +21,9 @@ class Perfil(models.Model):
         (ADMIN, 'ADMINISTRADOR'),
     )
 
-    usuario = models.OneToOneField(User, on_delete=models.CASCADE, default=True)
+    usuario = models.OneToOneField(User, related_name='perfil', on_delete=models.CASCADE, default=True)
     tipo_usuario = models.PositiveSmallIntegerField(_('Tipo de Usuário'), choices=TIPOS_USUARIOS, default=VENDEDOR)
-    sexo = models.PositiveSmallIntegerField(choices=SEXO)
+    sexo = models.CharField(max_length=1, choices=SEXO)
     fone = models.CharField(_('Telefone'), max_length=11, null=True)
     cpf = models.CharField(max_length=11)
     data_nasc = models.DateField(_('Data de Nascimento'))
