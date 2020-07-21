@@ -18,29 +18,23 @@
 
 ## Rotas de Autenticação
 **POST Login - /auth/login/**
-    ```
-    {
-        "username":"",
-        "password":""
-    }
-    ```
+>{
+    >"username":"",
+    >"password":""
+>}
 
 **POST Registro - /auth/registration/**
-    ```
-    {
-        "username":"",
-        "email":"",
-        "password1":"",
-        "password2":""
-    }
-    ```
+>{
+    >"username":"",
+    >"email":"",
+    >"password1":"",
+    >"password2":""
+>}
 
 **POST Logout - /auth/logout/**
-    ```
-    {
-        "token":""
-    }
-    ```
+>{
+    >"token":""
+>}
 
 
 ## Rotas de Usuarios
