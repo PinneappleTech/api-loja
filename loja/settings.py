@@ -168,7 +168,8 @@ REST_FRAMEWORK = {
 # JWT Settings
 REST_USE_JWT = True
 JWT_AUTH = {
-    'JWT_ALLOW_REFRESH': False,
+    'JWT_ALLOW_REFRESH': True,
+    'JWT_EXPIRATION_DELTA': timedelta(days=1),
 }
 
 # Allauth
