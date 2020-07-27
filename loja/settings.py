@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 from decouple import config, Csv
-from datetime import timedelta
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -42,12 +41,8 @@ INSTALLED_APPS = [
     #Libs
     'corsheaders',
     'rest_framework',
+    'rest_framework.authtoken',
     'django_filters',
-    'django.contrib.sites',
-    'allauth',
-    'allauth.account',
-    'rest_auth',
-    'rest_auth.registration',
     #Apps
     'usuarios',
     'clientes',
@@ -152,25 +147,12 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-#LOGIN_REDIRECT_URL = '/'
-#LOGOUT_REDIRECT_URL = '/auth/login/'
-
 #Django Rest Framework
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     ),
 }
-
-# JWT Settings
-REST_USE_JWT = True
-JWT_AUTH = {
-    'JWT_ALLOW_REFRESH': False,
-}
-
-# Allauth
-SITE_ID = 1
-ACCOUNT_EMAIL_VERIFICATION = 'none'
