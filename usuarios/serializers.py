@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
 
 from .models import Perfil
@@ -42,9 +43,11 @@ class UsuarioSerializer(serializers.ModelSerializer):
             'data_nasc',
         )
         read_only_fields = ['id', 'last_login', 'date_joined']
+        extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
         perfil_data = validated_data.pop('perfil')
+        validated_data['password'] = make_password(validated_data['password'])
         usuario = User.objects.create(**validated_data)
         Perfil.objects.create(usuario=usuario, **perfil_data)
         return usuario
