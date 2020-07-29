@@ -1,27 +1,17 @@
 from rest_framework import serializers
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
+from django.utils.translation import ugettext_lazy as _
 
 from .models import Perfil
 
-class PerfilSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Perfil
-        fields = (
-            'tipo_usuario',
-            'sexo',
-            'fone',
-            'cpf',
-            'data_nasc',
-        )
 
 class UsuarioSerializer(serializers.ModelSerializer):
-    #perfil = PerfilSerializer()
     tipo_usuario = serializers.ChoiceField(source='perfil.tipo_usuario', choices=Perfil.TIPOS_USUARIOS)
     sexo = serializers.ChoiceField(source='perfil.sexo', choices=Perfil.SEXO)
-    fone = serializers.CharField(source='perfil.fone')
-    cpf = serializers.CharField(source='perfil.cpf')
-    data_nasc = serializers.DateField(source='perfil.data_nasc')
+    fone = serializers.CharField(source='perfil.fone', max_length=11, min_length=11, required=False)
+    cpf = serializers.CharField(source='perfil.cpf', max_length=11, min_length=11)
+    data_nasc = serializers.DateField(source='perfil.data_nasc', required=False)
 
     class Meta:
         model = User
@@ -48,6 +38,7 @@ class UsuarioSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         perfil_data = validated_data.pop('perfil')
         validated_data['password'] = make_password(validated_data['password'])
+        validated_data['is_active'] = True
         usuario = User.objects.create(**validated_data)
         Perfil.objects.create(usuario=usuario, **perfil_data)
         return usuario

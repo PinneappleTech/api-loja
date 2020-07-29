@@ -11,7 +11,6 @@ class Base(models.Model):
     class Meta:
         abstract = True
 
-
 class Endereco(Base):
     endereco  = models.CharField(max_length=255)
     bairro    = models.CharField(max_length=100)

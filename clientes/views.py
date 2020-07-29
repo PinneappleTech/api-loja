@@ -8,7 +8,7 @@ class ClientesGenericView(generics.ListCreateAPIView):
     """
     API para listar e criar Cliente
     """
-    queryset = Cliente.objects.all()
+    queryset = Cliente.objects.filter(ativo=True)
     serializer_class = ClienteSerializer
 
 class ClienteGenericView(generics.RetrieveUpdateDestroyAPIView):
@@ -17,6 +17,10 @@ class ClienteGenericView(generics.RetrieveUpdateDestroyAPIView):
     """
     queryset = Cliente.objects.all()
     serializer_class = ClienteSerializer
+
+    def perform_destroy(self, instance):
+        instance.ativo = False
+        instance.save()
 
 ###Enderecos
 class EnderecosGenericView(generics.ListCreateAPIView):
