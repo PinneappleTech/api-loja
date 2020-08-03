@@ -9,8 +9,8 @@ from .models import Perfil
 class UsuarioSerializer(serializers.ModelSerializer):
     tipo_usuario = serializers.ChoiceField(source='perfil.tipo_usuario', choices=Perfil.TIPOS_USUARIOS)
     sexo = serializers.ChoiceField(source='perfil.sexo', choices=Perfil.SEXO)
-    fone = serializers.CharField(source='perfil.fone', max_length=11, min_length=11, required=False)
-    cpf = serializers.CharField(source='perfil.cpf', max_length=11, min_length=11)
+    fone = serializers.CharField(source='perfil.fone', max_length=11, min_length=11, style={'input_type': 'number'}, required=False)
+    cpf = serializers.CharField(source='perfil.cpf', max_length=11, min_length=11, style={'input_type': 'number'})
     data_nasc = serializers.DateField(source='perfil.data_nasc', required=False)
 
     class Meta:
