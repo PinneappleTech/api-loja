@@ -1,5 +1,9 @@
 # api-loja
 
+## GERAR SECRET_KEY
+1. Comando para gerar secret_key django
+```python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'```
+
 ## COMO RODAR
 1. Para rodar é necessario ter o Docker e o docker-compose instalados
 2. Após isso basta executar o comando
