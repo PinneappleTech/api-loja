@@ -33,12 +33,13 @@ class ClienteDetailView(generics.RetrieveUpdateDestroyAPIView):
         partial = kwargs.pop('partial', False)
         instance = self.get_object()
         serializer = self.get_serializer(instance, data=request.data, partial=partial)
-        serializer.is_valid(raise_exception=True)
         serializer_end = EnderecoSerializer(instance.endereco, data=request.data, partial=partial)
-        serializer_end.is_valid(raise_exception=True)
-        self.perform_update(serializer_end)
-        self.perform_update(serializer)
-        return Response(serializer.data)
+        print(serializer.initial_data, serializer_end.initial_data)
+        # serializer.is_valid(raise_exception=True)
+        # serializer_end.is_valid(raise_exception=True)
+        # self.perform_update(serializer_end)
+        # self.perform_update(serializer)
+        # return Response(serializer.data)
 
     def perform_destroy(self, instance):
         try:
