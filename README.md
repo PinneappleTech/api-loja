@@ -37,6 +37,13 @@
 **GET Usuario - /api1/usuarios/id/**
 
 **POST Usuario - /api1/usuarios/**
+Campos Obrigatorios ao enviar POST
+>{ "username":"",
+>   "password":"",
+>   "tipo_usuario":"", #tipos: 1-vendedor, 2-caixa, 3-supervisor, 4-administrador
+>   "sexo":"", #opções: M-masculino, F-feminino
+>   "cpf":""
+>}
 
 **PUT Usuario - /api1/usuarios/id/**
 
@@ -49,6 +56,21 @@
 **GET Cliente - /api1/clientes/id/**
 
 **POST Cliente - /api1/clientes/**
+>{  "nome":"",
+>   "cpf":"",
+>   "sexo":"", #Opções: M-masculino, F-feminino
+>   "data_nasc":"", #Formato: aaaa-mm-dd
+>   "fone":"",
+>   "estado_civil":"", #Opções: 1-casado, 2-divorciado, 3-separado, 4-solteiro, 5-viuvo
+>   "credito":"",
+>   "endereco": {
+>       "logradouro":"",
+>       "bairro":"",
+>       "cep":"",
+>       "uf":"",
+>       "cidade":""
+>    }
+>}
 
 **PUT Cliente - /api1/clientes/id/**
 
