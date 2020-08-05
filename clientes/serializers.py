@@ -66,9 +66,16 @@ class ClienteSerializer(serializers.ModelSerializer):
         return cliente
 
     def update(self, instance, validated_data):
-        if 'endereco' in validated_data:
-            instance.endereco = validated_data.get('endereco', instance.endereco)
-        if 'end_entrega' in validated_data:
-            instance.end_entrega = validated_data.get('end_entrega', instance.end_entrega)
-        # instance.created = validated_data.get('created', instance.created)
+        for field_data in validated_data:
+            if not(field_data in ['endereco', 'end_entrega']):
+                setattr(instance, field_data, validated_data.get(field_data, getattr(instance, field_data)))
+            if 'endereco' in validated_data:
+                for field in validated_data['endereco']:
+                    setattr(instance.endereco, field, validated_data.get('endereco').get(field, getattr(instance.endereco, field)))
+                instance.endereco.save()
+            if 'end_entrega' in validated_data:
+                for field in validated_data['end_entrega']:
+                    setattr(instance.end_entrega, field, validated_data.get('end_entrega').get(field, getattr(instance.end_entrega, field)))
+                instance.end_entrega.save()
+        instance.save()
         return instance
