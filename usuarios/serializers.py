@@ -42,3 +42,14 @@ class UsuarioSerializer(serializers.ModelSerializer):
         usuario = User.objects.create(**validated_data)
         Perfil.objects.create(usuario=usuario, **perfil_data)
         return usuario
+
+    def update(self, instance, validated_data):
+        for field in validated_data:
+            if field == 'perfil':
+                for field in validated_data['perfil']:
+                    setattr(instance.perfil, field, validated_data.get('perfil').get(field, getattr(instance.perfil, field)))
+                instance.perfil.save()
+            else:
+                setattr(instance, field, validated_data.get(field, getattr(instance, field)))
+        instance.save()
+        return instance
