@@ -8,10 +8,12 @@ from .models import Perfil
 
 class UsuarioSerializer(serializers.ModelSerializer):
     tipo_usuario = serializers.ChoiceField(source='perfil.tipo_usuario', choices=Perfil.TIPOS_USUARIOS)
-    sexo = serializers.ChoiceField(source='perfil.sexo', choices=Perfil.SEXO)
-    fone = serializers.CharField(source='perfil.fone', max_length=11, min_length=11, style={'input_type': 'number'}, required=False)
-    cpf = serializers.CharField(source='perfil.cpf', max_length=11, min_length=11, style={'input_type': 'number'})
-    data_nasc = serializers.DateField(source='perfil.data_nasc', required=False)
+    sexo         = serializers.ChoiceField(source='perfil.sexo', choices=Perfil.SEXO)
+    fone         = serializers.CharField(source='perfil.fone', max_length=11, min_length=11, style={'input_type': 'number'}, required=False)
+    cpf          = serializers.CharField(source='perfil.cpf', max_length=11, min_length=11, style={'input_type': 'number'})
+    data_nasc    = serializers.DateField(source='perfil.data_nasc', required=False)
+    estado_civil = serializers.ChoiceField(source='perfil.estado_civil', choices=Perfil.ESTADO_CIVIL, required=False)
+    obs          = serializers.CharField(source='perfil.obs', max_length=255, required=False)
 
     class Meta:
         model = User
@@ -31,6 +33,8 @@ class UsuarioSerializer(serializers.ModelSerializer):
             'fone',
             'cpf',
             'data_nasc',
+            'estado_civil',
+            'obs'
         )
         read_only_fields = ['id', 'last_login', 'date_joined']
         extra_kwargs = {'password': {'write_only': True}}

@@ -23,7 +23,7 @@ class EnderecoSerializer(serializers.ModelSerializer):
 # nome, cpf, sexo, data_nasc, fone, estado_civil, filiação
 # status, credito, criado_por, endereço criado_em, atualizado_em, ativo
 class ClienteSerializer(serializers.ModelSerializer):
-    endereco = EnderecoSerializer()
+    endereco    = EnderecoSerializer()
     end_entrega = EnderecoSerializer(required=False)
 
     class Meta:
@@ -69,10 +69,12 @@ class ClienteSerializer(serializers.ModelSerializer):
         for field_data in validated_data:
             if not(field_data in ['endereco', 'end_entrega']):
                 setattr(instance, field_data, validated_data.get(field_data, getattr(instance, field_data)))
+
             if 'endereco' in validated_data:
                 for field in validated_data['endereco']:
                     setattr(instance.endereco, field, validated_data.get('endereco').get(field, getattr(instance.endereco, field)))
                 instance.endereco.save()
+                
             if 'end_entrega' in validated_data:
                 for field in validated_data['end_entrega']:
                     setattr(instance.end_entrega, field, validated_data.get('end_entrega').get(field, getattr(instance.end_entrega, field)))
