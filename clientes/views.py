@@ -1,34 +1,38 @@
 from rest_framework import generics
+from rest_framework.response import Response
+from rest_framework import status
+from django.db.models import ProtectedError
 
-from .models import Cliente, Endereco
+from .models import Cliente
 from .serializers import ClienteSerializer, EnderecoSerializer
 
 ###CLIENTES
-class ClientesGenericView(generics.ListCreateAPIView):
+class ClienteListCreateView(generics.ListCreateAPIView):
     """
-    API para listar e criar Cliente
+    Recurso para listar e criar Cliente
     """
-    queryset = Cliente.objects.all()
+    queryset = Cliente.objects.filter(ativo=True)
     serializer_class = ClienteSerializer
 
-class ClienteGenericView(generics.RetrieveUpdateDestroyAPIView):
+    def perform_create(self, serializer):
+        serializer.save(criado_por=self.request.user, ativo=True)
+        
+
+class ClienteDetailView(generics.RetrieveUpdateDestroyAPIView):
     """
     API para buscar, atualizar e deletar Cliente
     """
     queryset = Cliente.objects.all()
     serializer_class = ClienteSerializer
 
-###Enderecos
-class EnderecosGenericView(generics.ListCreateAPIView):
-    """
-    API para listar e criar Enderecos
-    """
-    queryset = Endereco.objects.all()
-    serializer_class = EnderecoSerializer
+    def perform_destroy(self, instance):
+        try:
+            if instance.endereco is not None:
+                instance.endereco.delete()
+            if instance.end_entrega is not None:
+                instance.end_entrega.delete()
+            instance.delete()
+        except ProtectedError as error:
+            raise ValidationError(error)
 
-class EnderecoGenericView(generics.RetrieveUpdateDestroyAPIView):
-    """
-    API para buscar, atualizar e deletar endereco
-    """
-    queryset = Endereco.objects.all()
-    serializer_class = EnderecoSerializer
+        

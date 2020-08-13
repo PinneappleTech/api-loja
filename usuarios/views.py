@@ -9,7 +9,7 @@ class UsuariosGenericView(generics.ListCreateAPIView):
     """
     API para listar e criar Usuario
     """
-    queryset = User.objects.filter(is_active=True)
+    queryset = User.objects.all()
     serializer_class = UsuarioSerializer
 
 class UsuarioGenericView(generics.RetrieveUpdateDestroyAPIView):
@@ -18,7 +18,3 @@ class UsuarioGenericView(generics.RetrieveUpdateDestroyAPIView):
     """
     queryset = User.objects.all()
     serializer_class = UsuarioSerializer
-
-    def perform_destroy(self, instance):
-        instance.is_active = False
-        instance.save()
