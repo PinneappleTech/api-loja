@@ -15,8 +15,8 @@ class MarcaSerializer(serializers.ModelSerializer):
         read_only_fields = ['id']
 
 class ProdutoSerializer(serializers.ModelSerializer):
-    categoria = CategoriaSerializer()
-    marca     = MarcaSerializer(required=False)
+    # categoria = CategoriaSerializer()
+    # marca     = MarcaSerializer(required=False)
 
     class Meta:
         model = Produto
