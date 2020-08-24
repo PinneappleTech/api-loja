@@ -1,7 +1,8 @@
 from rest_framework import generics
+from rest_framework.response import Response
 
 from .models import Categoria, Marca, Produto
-from .serializers import CategoriaSerializer, MarcaSerializer, ProdutoSerializer
+from .serializers import CategoriaSerializer, MarcaSerializer, ProdutoSerializer, ProdutoCreateSerializer
 
 # Create your views here.
 #CATEGORIA
@@ -42,6 +43,7 @@ class ProdutoList(generics.ListCreateAPIView):
     """
     queryset = Produto.objects.all()
     serializer_class = ProdutoSerializer
+
 
 class ProdutoDetail(generics.RetrieveUpdateDestroyAPIView):
     """
