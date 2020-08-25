@@ -38,6 +38,10 @@ class MarcaDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     queryset = Marca.objects.all()
     serializer_class = MarcaSerializer
+    http_method_names = ['get', 'patch', 'delete']
+
+    # def update(self, request, pk):
+    #     return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
 #PRODUTO
 class ProdutoList(APIView):
@@ -66,9 +70,9 @@ class ProdutoDetail(APIView):
         serializer = ProdutoSerializer(produto)
         return Response(serializer.data)
 
-    def put(self, request, pk):
+    def patch(self, request, pk):
         produto = get_object_or_404(Produto, pk=pk)
-        serializer = ProdutoCreateSerializer(produto, data=request.data)
+        serializer = ProdutoCreateSerializer(produto, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)

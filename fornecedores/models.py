@@ -15,7 +15,7 @@ class Base(models.Model):
 
 class Fornecedor(Base):
     nome     = models.CharField(max_length=150)
-    cnpj     = models.CharField(max_length=14)
+    cnpj     = models.CharField(max_length=14, unique=True)
     fone     = models.CharField(max_length=11)
-    email    = models.EmailField()
+    email    = models.EmailField(null=True, blank=True)
     endereco = models.ForeignKey(Endereco, on_delete=models.SET_NULL, null=True)
