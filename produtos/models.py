@@ -56,7 +56,7 @@ class Produto(Base):
     )
 
     categoria = models.ForeignKey(Categoria, related_name='categoria_produtos', on_delete=models.PROTECT)
-    marca     = models.ForeignKey(Marca, related_name='marca_produtos', on_delete=models.SET_NULL, null=True, blank=True)
+    marca     = models.ForeignKey(Marca, related_name='marca_produtos', on_delete=models.PROTECT)
     nome      = models.CharField(max_length=150)
     estoque   = models.PositiveIntegerField(_("Estoque"))
     preco     = models.DecimalField(_("Preço"), max_digits=10, decimal_places=2) #99.999.99,99

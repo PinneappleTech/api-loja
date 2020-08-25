@@ -34,8 +34,8 @@ class ProdutoCreateSerializer(serializers.ModelSerializer):
 
 
 class ProdutoSerializer(serializers.ModelSerializer):
-    categoria = CategoriaSerializer()
-    marca     = MarcaSerializer(required=False)
+    categoria = serializers.StringRelatedField()
+    marca     = serializers.StringRelatedField()
 
     class Meta:
         model = Produto
