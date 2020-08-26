@@ -38,10 +38,7 @@ class MarcaDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     queryset = Marca.objects.all()
     serializer_class = MarcaSerializer
-    http_method_names = ['get', 'patch', 'delete']
-
-    # def update(self, request, pk):
-    #     return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
+    # http_method_names = ['get', 'patch', 'delete']
 
 #PRODUTO
 class ProdutoList(APIView):
