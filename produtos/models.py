@@ -55,15 +55,16 @@ class Produto(Base):
         ("B", "BABY")
     )
 
-    categoria = models.ForeignKey(Categoria, related_name='categoria_produtos', on_delete=models.PROTECT)
-    marca     = models.ForeignKey(Marca, related_name='marca_produtos', on_delete=models.PROTECT)
-    nome      = models.CharField(max_length=150)
-    estoque   = models.PositiveIntegerField(_("Estoque"))
-    preco     = models.DecimalField(_("Preço"), max_digits=10, decimal_places=2) #99.999.99,99
-    genero    = models.CharField(_("Gênero"), max_length=1, choices=GENERO)
-    tipo      = models.CharField(_("Tipo"), max_length=1, choices=TIPO, null=True, blank=True)
-    tamanho   = models.CharField(_("Tamanho"), max_length=3)
-    descricao = models.TextField(_("Descrição"), null=True, blank=True)
+    categoria   = models.ForeignKey(Categoria, related_name='categoria_produtos', on_delete=models.PROTECT)
+    marca       = models.ForeignKey(Marca, related_name='marca_produtos', on_delete=models.PROTECT)
+    nome        = models.CharField(max_length=150)
+    estoque     = models.PositiveIntegerField(_("Estoque"))
+    estoque_min = models.PositiveIntegerField(_("Estoque Mínimo"), default=1)
+    preco       = models.DecimalField(_("Preço"), max_digits=10, decimal_places=2) #99.999.99,99
+    genero      = models.CharField(_("Gênero"), max_length=1, choices=GENERO)
+    tipo        = models.CharField(_("Tipo"), max_length=1, choices=TIPO, null=True, blank=True)
+    tamanho     = models.CharField(_("Tamanho"), max_length=3)
+    descricao   = models.TextField(_("Descrição"), null=True, blank=True)
 
     def clean(self):
         self.nome = self.nome.title()
