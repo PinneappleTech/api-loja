@@ -18,16 +18,19 @@ from django.urls import path, include
 from rest_framework.authtoken import views
 from rest_framework_swagger.views import get_swagger_view
 
+from .views import CustomAuthToken
+
 
 schema_view = get_swagger_view(title='Documentação API Loja')
 
 urlpatterns = [
     path('', schema_view),
     path('admin/', admin.site.urls),
-    path('auth/login/', views.obtain_auth_token),
+    path('auth/login/', CustomAuthToken.as_view()),
 
     path('clientes/', include('clientes.urls')),
     path('fornecedores/', include('fornecedores.urls')),
     path('usuarios/', include('usuarios.urls')),
     path('produtos/', include('produtos.urls')),
+    path('vendas/', include('vendas.urls')),
 ]
