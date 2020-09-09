@@ -23,14 +23,13 @@ class ProdutoCreateSerializer(serializers.ModelSerializer):
         fields = [
             'categoria',
             'marca',
-            'nome',
+            'descricao',
             'estoque',
             'estoque_min',
             'preco',
             'genero',
             'tipo',
-            'tamanho',
-            'descricao'
+            'tamanho'
         ]
 
 
@@ -44,14 +43,13 @@ class ProdutoSerializer(serializers.ModelSerializer):
             'id',
             'categoria',
             'marca',
-            'nome',
+            'descricao',
             'estoque',
             'estoque_min',
             'preco',
             'genero',
             'tipo',
             'tamanho',
-            'descricao',
             'criado_em',
             'atualizado_em',
             'ativo'
